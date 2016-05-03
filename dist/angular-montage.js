@@ -223,14 +223,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-		var BASE_URL = 'mntge.com';
-
 		var Client = function () {
-			function Client(subdomain, token) {
-				var url = arguments.length <= 2 || arguments[2] === undefined ? BASE_URL : arguments[2];
+			function Client(project, token) {
 				(0, _classCallCheck3.default)(this, Client);
 
-				this.hostname = subdomain + '.' + url;
+				this.protocol = 'https';
+				this.host = 'mntge.com';
+				this.project = project;
 				this.token = token;
 
 				this.documents = new _document2.default(this);
@@ -244,7 +243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			(0, _createClass3.default)(Client, [{
 				key: 'url',
 				value: function url(endpoint) {
-					return 'https://' + this.hostname + '/api/v1/' + endpoint;
+					return this.protocol + '://' + this.project + '.' + this.host + '/api/v1/' + endpoint;
 				}
 			}, {
 				key: 'authenticate',
@@ -390,7 +389,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* 4 */
 	/***/ function(module, exports) {
 
-		var core = module.exports = {version: '2.2.0'};
+		var core = module.exports = {version: '2.2.1'};
 		if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 	/***/ },
@@ -2443,7 +2442,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 		    if (!hasOwnProperty(obj, k)) {
 		      obj[k] = v;
-		    } else if (Array.isArray(obj[k])) {
+		    } else if (isArray(obj[k])) {
 		      obj[k].push(v);
 		    } else {
 		      obj[k] = [obj[k], v];
@@ -2451,6 +2450,10 @@ return /******/ (function(modules) { // webpackBootstrap
 		  }
 
 		  return obj;
+		};
+
+		var isArray = Array.isArray || function (xs) {
+		  return Object.prototype.toString.call(xs) === '[object Array]';
 		};
 
 
@@ -2505,10 +2508,10 @@ return /******/ (function(modules) { // webpackBootstrap
 		  }
 
 		  if (typeof obj === 'object') {
-		    return Object.keys(obj).map(function(k) {
+		    return map(objectKeys(obj), function(k) {
 		      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
-		      if (Array.isArray(obj[k])) {
-		        return obj[k].map(function(v) {
+		      if (isArray(obj[k])) {
+		        return map(obj[k], function(v) {
 		          return ks + encodeURIComponent(stringifyPrimitive(v));
 		        }).join(sep);
 		      } else {
@@ -2521,6 +2524,27 @@ return /******/ (function(modules) { // webpackBootstrap
 		  if (!name) return '';
 		  return encodeURIComponent(stringifyPrimitive(name)) + eq +
 		         encodeURIComponent(stringifyPrimitive(obj));
+		};
+
+		var isArray = Array.isArray || function (xs) {
+		  return Object.prototype.toString.call(xs) === '[object Array]';
+		};
+
+		function map (xs, f) {
+		  if (xs.map) return xs.map(f);
+		  var res = [];
+		  for (var i = 0; i < xs.length; i++) {
+		    res.push(f(xs[i], i));
+		  }
+		  return res;
+		}
+
+		var objectKeys = Object.keys || function (obj) {
+		  var res = [];
+		  for (var key in obj) {
+		    if (Object.prototype.hasOwnProperty.call(obj, key)) res.push(key);
+		  }
+		  return res;
 		};
 
 

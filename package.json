@@ -9,7 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "montagedata": "git+https://github.com/EditLLC/javascript-montage.git#41052a7e0baae471c8175d82370c3dedd80d1452"
+    "montagedata": "git+https://github.com/EditLLC/javascript-montage.git#646dc9178409f97018fb2ba77ee77819c451a9de"
   },
   "devDependencies": {
     "webpack": "^1.12.14"
