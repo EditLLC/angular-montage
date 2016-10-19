@@ -2,7 +2,7 @@
 
 var montageData = require('montagedata');
 
-angular
+export default angular
 	.module('ngMontage', [])
 	.factory('montage', ['$q', function ($q) {
 
