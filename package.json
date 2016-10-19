@@ -12,6 +12,9 @@
     "montagedata": "git+https://github.com/EditLLC/javascript-montage.git#25fcfafe9736b474c1a160ba6c4bb2793d7701a4"
   },
   "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
     "webpack": "^1.12.14"
   }
 }
