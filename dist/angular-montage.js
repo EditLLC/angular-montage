@@ -56,23 +56,23 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+			value: true
+	});
 	var montageData = __webpack_require__(1);
 
-	angular
-		.module('ngMontage', [])
-		.factory('montage', ['$q', function ($q) {
+	exports.default = angular.module('ngMontage', []).factory('montage', ['$q', function ($q) {
 
 			var _request = montageData.Client.prototype.request;
 
-			montageData.Client.prototype.request = function() {
+			montageData.Client.prototype.request = function () {
 
-				// Wrap the Montage promise in an Angular promise
-				return $q.when(_request.apply(this, arguments));
+					// Wrap the Montage promise in an Angular promise
+					return $q.when(_request.apply(this, arguments));
 			};
 
 			return montageData;
-		}]);
-
+	}]);
 
 /***/ },
 /* 1 */
